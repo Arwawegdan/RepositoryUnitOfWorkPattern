@@ -1,0 +1,23 @@
+﻿
+<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" @onchange="OnValueChange">
+    @foreach (Employee Employee in DataSource ?? new List<Employee>())
+    {
+        <option type="input" value="@Employee.Name">@Employee.Name</option>
+        
+    }
+</select>
+@code {
+    [Parameter] public List<Employee> DataSource { get; set; } = new List<Employee>();
+
+    [Parameter] public string Value { get; set; }
+
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter] public EventCallback<string> OnChange { get; set; }
+
+    private async void OnValueChange(ChangeEventArgs args)
+    {
+        Value = (string)args.Value;
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

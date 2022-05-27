@@ -1,0 +1,165 @@
+﻿@page "/Employees"
+
+<PageTitle>Counter</PageTitle>
+
+
+<div class="form-group">
+    <div class="w-75 input-group mb-3 ">
+        <input @bind-value="@SearchText" @bind-value:event="oninput" type="text" class="form-control" placeholder="Search" aria-label="Search">
+        @if (SearchText != null)
+        {
+            <table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Telephone</th>
+            <th>Age</th>
+            <th>Birthdate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Employee employee in FilteredEmployees?? new())
+        {
+        <tr>
+             <td>@employee.Id</td>
+            <td>@employee.Name</td>
+            <td>@employee.Mobile</td>
+            <td>@employee.Telephone</td>
+            <td>@employee.Age</td>
+            <td>@employee.BirthDate</td>
+       </tr> 
+        }
+    </tbody>
+</table>      
+        }
+    </div>
+    </div>
+
+
+<EditForm Model="employee" OnValidSubmit="SaveEmployee" class="card card-body bg-light mt-5">
+	<Blazored.FluentValidation.FluentValidationValidator />
+	
+	<div class="form-group row">
+		<label for="name" class="col-md-2 col-form-label">Name:</label>
+		<div class="col-md-10">
+			<InputText id="name" class="form-control" @bind-Value="employee.Name" />
+			<ValidationMessage For="@(() => employee.Name)" />
+		</div>
+        </div>
+        <div class="form-group row">
+		<label for="Mobile" class="col-md-2 col-form-label">Mobile:</label>
+		<div class="col-md-10">
+			<InputText id="Mobile" class="form-control" @bind-Value="employee.Mobile" />
+			<ValidationMessage For="@(() => employee.Mobile)" />
+	</div>
+    </div>
+          <div class="form-group row">
+		<label for="Telephone" class="col-md-2 col-form-label">Telephone:</label>
+		<div class="col-md-10">
+			<InputText id="Telephone" class="form-control" @bind-Value="employee.Telephone" />
+			<ValidationMessage For="@(() => employee.Telephone)" />
+	</div>
+    </div> 
+ 
+	<div class="form-group row">
+		<label for="Age" class="col-md-2 col-form-label">Age:</label>
+		<div class="col-md-10">
+			<InputNumber id="price" class="form-control" @bind-Value="employee.Age" />
+			<ValidationMessage For="@(() => employee.Age)" />
+		</div>
+	</div>
+	<div class="form-group">
+        <label for="birthDate">BirthDate</label>
+        <div>
+            <InputDate class="form-control" @bind-Value="@employee.BirthDate"/>
+            <ValidationMessage For="@(() => employee.BirthDate)"/>
+        </div>
+        	<div class="row">
+		<div class="col-md-12 text-right">
+			 <button class="btn btn-primary" @onclick="SaveEmployee">          
+        Save</button>
+		</div>
+	</div>
+	</div>
+</EditForm>
+<div>
+    <input type="checkbox" @bind= "@showbuttons"  />
+</div> 
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Telephone</th>
+            <th>Age</th>
+            <th>Birthdate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Employee employee in employees?? new())
+        {
+        <tr>
+             <td>@employee.Id</td>
+            <td>@employee.Name</td>
+            <td>@employee.Mobile</td>
+            <td>@employee.Telephone</td>
+            <td>@employee.Age</td>
+            <td>@employee.BirthDate</td>
+            @if (showbuttons) {
+           <a href="/employee/editfrom/@employee.Id" button > Edit</a>
+           
+           <div class="form-group">
+           <DropDownList DataSource="employees" @bind-Value="@employee.Name" />
+           
+                 </div>
+         
+
+         <button @onclick= "@OnEditEmployee">SaveChanges</button> 
+         
+                <button @onclick= "@(() => OnDeleteEmployee(employee.Id) )">Delete</button> 
+            }
+        </tr> 
+        }
+    </tbody>
+</table>
+
+
+<div class="form-group">
+    <div class="w-75 input-group mb-3 ">
+        <input @bind-value="@SearchText" @bind-value:event="oninput" type="text" class="form-control" placeholder="Search" aria-label="Search">
+        <button @onclick = "@(() => OnClickSearch())"/> 
+        @if (SearchText != null)
+        {
+            <table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Telephone</th>
+            <th>Age</th>
+            <th>Birthdate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Employee employee in employees?? new())
+        {
+        <tr>
+             <td>@employee.Id</td>
+            <td>@employee.Name</td>
+            <td>@employee.Mobile</td>
+            <td>@employee.Telephone</td>
+            <td>@employee.Age</td>
+            <td>@employee.BirthDate</td>
+       </tr> 
+        }
+    </tbody>
+</table>      
+        }
+    </div>
+    </div>
+
+

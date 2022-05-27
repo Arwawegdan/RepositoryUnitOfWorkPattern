@@ -1,0 +1,15 @@
+﻿@page "/employee/editfrom/{employeeId}"
+
+<PageTitle>Edit @employee.Name Employee</PageTitle>
+<h5> Edit Employee </h5>
+
+<EditForm Model="employee">
+    <label>@employee.Id</label>
+    <InputText @bind-Value="employee.Name">Name</InputText>
+    <InputText @bind-Value="employee.Mobile"></InputText>
+    <InputText @bind-Value="employee.Telephone"></InputText>
+    <InputNumber @bind-Value="employee.Age"></InputNumber>
+    <InputDate @bind-Value="employee.BirthDate"></InputDate>
+</EditForm>
+
+<button @onclick="OnEditEmployee">Save Changes</button>

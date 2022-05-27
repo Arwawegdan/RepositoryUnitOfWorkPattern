@@ -1,0 +1,47 @@
+﻿@page "/employee/Search/{SearchText}"
+
+<PageTitle>Search </PageTitle>
+
+
+<form Model="employee" >
+  <input type="text" placeholder="Search.." name="search">
+  <button  type="submit" @onclick= "@(() => OnClickSearch(SearchText) )"> Search</button>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Telephone</th>
+            <th>Age</th>
+            <th>Birthdate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Employee employee in employees?? new())
+        {
+        <tr>
+             <td>@employee.Id</td>
+            <td>@employee.Name</td>
+            <td>@employee.Mobile</td>
+            <td>@employee.Telephone</td>
+            <td>@employee.Age</td>
+            <td>@employee.BirthDate</td>
+           <a href="/employee/editfrom/@employee.Id" button > Edit</a>
+                <button @onclick= "@(() => OnClickSearch(SearchText) )">Search</button> 
+        </tr> 
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
